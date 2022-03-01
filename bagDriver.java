@@ -7,7 +7,7 @@ public class bagDriver
         Scanner keyboard = new Scanner(System.in);
  
             System.out.println("Hello here is a demo using the 3 methods in bag interface.");
-            int cap = 10;
+            int cap = 25;
             int choice;
 
             //user chooses between resizable and linked
