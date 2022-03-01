@@ -50,30 +50,8 @@ public class LinkedBagTest
 
            
         } // end main
-       
-       // Tests the method isEmpty.
-       // Precondition: If the bag is empty, the parameter empty should be true;
-       // otherwise, it should be false.
-        private static void testIsEmpty(BagInterface<String> bag, boolean empty)
-       {
-          System.out.print("\nTesting isEmpty with ");
-          if (empty)
-             System.out.println("an empty bag:");
-          else
-             System.out.println("a bag that is not empty:");
-          
-          System.out.print("isEmpty finds the bag ");
-          if (empty && bag.isEmpty())
-                System.out.println("empty: OK.");
-            else if (empty)
-                System.out.println("not empty, but it is: ERROR.");
-            else if (!empty && bag.isEmpty())
-                System.out.println("empty, but it is not empty: ERROR.");
-            else
-                System.out.println("not empty: OK.");      
-        } // end testIsEmpty
-       
-       // Tests the method add.
+      
+        
        private static void testAdd(BagInterface<String> aBag, String[] content)
        {
           System.out.print("Adding the following strings to the bag: ");
@@ -103,5 +81,4 @@ public class LinkedBagTest
           System.out.println();
        } // end displayBag
     
-    } // end LinkedBagDemo1
-}
+    } // end LinkedBagTest
