@@ -10,6 +10,7 @@ public final class LinkedBag<T> implements BagInterface<T>
 {
 	private Node firstNode;       // Reference to first node
 	private int numberOfEntries;
+   
 
 	public LinkedBag()
 	{
@@ -75,17 +76,51 @@ public final class LinkedBag<T> implements BagInterface<T>
                 was successful, or null. */
 	public T remove()
    {
-      return null; // STUB
-   } // end remove
+      T result=null;
+      if (firstNode != null)
+      {
+         result=firstNode.getData();
+         firstNode=firstNode.getNextNode();
+         numberOfEntries--;
+      }
+      return result;
+   } 
    
 	/** Removes one occurrence of a given entry from this bag.
        @param anEntry  The entry to be removed.
        @return  True if the removal was successful, or false otherwise. */
    public boolean remove(T anEntry)
    {
-      return false; // STUB
+      boolean result = false;
+      Node nodeN = getReferenceTo(anEntry);
+      
+      if (nodeN != null)
+      {
+         nodeN.setData(firstNode.getData()); 
+
+         firstNode = firstNode.getNextNode(); 
+         numberOfEntries--;
+         
+         result = true;
+      }
+      return result;
    } // end remove
-	
+   private Node getReferenceTo(T anEntry)
+   {
+      boolean found = false;
+      Node currentNode = firstNode;
+
+      while (!found && (currentNode != null))
+      {
+         if (anEntry.equals(currentNode.getData()))
+         found = true;
+         else
+         currentNode = currentNode.getNextNode();
+      } // end while
+     
+   return currentNode;
+   }
+
 	/** Removes all entries from this bag. */
 	public void clear()
    {
@@ -105,7 +140,22 @@ public final class LinkedBag<T> implements BagInterface<T>
 		 @return  True if the bag contains anEntry, or false otherwise. */
 	public boolean contains(T anEntry)
    {
-      return false; // STUB
+      
+         boolean contains = false;
+         Node  currentNode = firstNode;
+         while (!contains && (currentNode != null)) 
+         {
+             if (anEntry.equals(currentNode.data)) 
+             {
+                 contains = true;
+             }
+             else 
+             {
+                 currentNode = currentNode.next;
+             }
+         }
+         return contains;
+     
    } // end contains
 
 	private class Node
@@ -122,8 +172,22 @@ public final class LinkedBag<T> implements BagInterface<T>
 		{
 			data = dataPortion;
 			next = nextNode;	
-		} // end constructor
-	} // end Node
+		}
+     		private T getData()
+      		{
+        	 return data;
+     		 }
+     		private void setData(T newData)
+     		 {
+         		data=newData;
+      		 }
+      		private Node getNextNode()
+      		{
+         		return next;
+      		}
+      
+    	} // end constructor
+		// end Node
 
    //union method
    public BagInterface < T > union(BagInterface < T > otherBag)
@@ -145,27 +209,8 @@ public final class LinkedBag<T> implements BagInterface<T>
     //intersection method
     public BagInterface < T > intersection(BagInterface < T > otherBag)
     {
-      LinkedBag<T> intersectionBag = new LinkedBag<T>();
-      T[] bag1 = this.toArray();
-      for (int i=0;i<bag1.length;i++)
-      {
-        intersectionBag.add(bag1[i]);
-      }
-      T[] bag2 = otherBag.toArray();
-      for (int j=0;j<bag2.length-1;j++)
-      {
-        if(intersectionBag==(bag2[j]))
-        {
-           intersectionBag.remove(bag2[j]);
-        }
-      }
-      return intersectionBag;
-    }
-    //difference method
-    public BagInterface < T > difference(BagInterface < T > otherBag)
-    {
       LinkedBag<T> newBag = new LinkedBag<T>();
-      LinkedBag<T> differenceBag = new LinkedBag<T>();
+      LinkedBag<T> intersectionBag = new LinkedBag<T>();
       T[] bag1 = this.toArray();
       for (int i=0;i<bag1.length;i++)
       {
@@ -174,17 +219,32 @@ public final class LinkedBag<T> implements BagInterface<T>
       T[] bag2 = otherBag.toArray();
       for (int j=0;j<bag2.length;j++)
       {
-        if(newBag.contains(bag2[j])&&!differenceBag.contains(bag2[j]))
+        if(newBag.contains(bag2[j])&&!intersectionBag.contains(bag2[j]))
         {
-           differenceBag.add(bag2[j]);
+           intersectionBag.add(bag2[j]);
         }
       }
+      return intersectionBag;
+    }
+    //difference method
+    public BagInterface < T > difference(BagInterface < T > otherBag) 
+    {
+      LinkedBag<T> differenceBag = new LinkedBag<T>();
+      T[] bag1 = this.toArray();
+        for (int i=0;i<bag1.length;i++) 
+        {
+            differenceBag.add(bag1[i]);
+        }
+        T[] bag2 = otherBag.toArray();
+        for (int j=0;j<bag2.length;j++) 
+        {
+            if(differenceBag.contains(bag2[j])) 
+            {
+                differenceBag.remove(bag2[j]);
+            }
+        }
       return differenceBag;
    }
-
-
-
-
 } // end LinkedBag1
 
 
