@@ -6,5 +6,3 @@ Shary Razo - BagInterface.java, bagDriver.java and Time Complexities
 No testing framework
 
 [link to video]
-
-index.html javadoc start page
