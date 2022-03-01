@@ -5,4 +5,5 @@ Shary Razo - BagInterface.java, bagDriver.java and Time Complexities
 
 No testing framework
 
-[link to video]
+Link to group screencast video:
+https://vimeo.com/683160312
